@@ -14,6 +14,8 @@ validate-job:   # This job runs in the test stage.
     - echo "Validating... This will take about 5 seconds."
     - sleep 5
     - echo "Code coverage is fake - 90%"
+    - chmod u+x ./deploy.sh
+    - bash ./deploy.sh -u 'anastasia.reister@mindful-goat-ch4d96.com' -p '7bCgR67X9coGAzQyOHQF0L3StVn9x8j26mEoNCX' -iu 'https://mindful-goat-ch4d96-dev-ed.my.salesforce.com'
   rules:
     - if: $CI_MERGE_REQUEST_ID
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /\[(master)]/
