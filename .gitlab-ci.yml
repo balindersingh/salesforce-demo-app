@@ -1,0 +1,19 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - validate
+
+build-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  script:
+    - echo "Compiling the code... running for all branches"
+    - echo "Compile complete."
+
+validate-job:   # This job runs in the test stage.
+  stage: validate    # It only starts when the job in the build stage completes successfully.
+  script:
+    - echo "Validating... This will take about 5 seconds."
+    - sleep 5
+    - echo "Code coverage is fake - 90%"
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /\[(master)]/
