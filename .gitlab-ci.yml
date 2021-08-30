@@ -12,9 +12,10 @@ build-job:       # This job runs in the build stage, which runs first.
 validate-job:   # This job runs in the test stage.
   stage: validate    # It only starts when the job in the build stage completes successfully.
   script:
-    - echo 'Validating deployment to Salesforce with username - $SF_USERNAME'
+    - echo "Testing - $TESTVAR"
+    - echo "Validating deployment to Salesforce with username - $SF_USERNAME"
     - chmod u+x ./deploy.sh
-    - bash ./deploy.sh -u '$SF_USERNAME' -p '$SF_PASSWORD_WITH_SECURITYTOKEN' -iu 'https://mindful-goat-ch4d96-dev-ed.my.salesforce.com'
+    - bash ./deploy.sh -u "$SF_USERNAME" -p "$SF_PASSWORD_WITH_SECURITYTOKEN" -iu "https://mindful-goat-ch4d96-dev-ed.my.salesforce.com"
   rules:
     - if: $CI_MERGE_REQUEST_ID
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /\[(master)]/
